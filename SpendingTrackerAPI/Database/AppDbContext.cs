@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SpendingTrackerAPI.Entities;
 
 namespace SpendingTrackerAPI.Database;
 
@@ -8,5 +9,8 @@ public class AppDbContext:DbContext
     {
     }
     
-    
+    public DbSet<Expense> Expenses { get; set; }
+    public DbSet<ExpenseCategory> ExpenseCategories { get; set; }
+    public DbSet<Income> Incomes { get; set; }
+    public DbSet<IncomeCategory> IncomeCategories { get; set; }
 }
