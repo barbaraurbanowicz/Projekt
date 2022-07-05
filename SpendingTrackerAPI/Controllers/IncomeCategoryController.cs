@@ -9,9 +9,9 @@ namespace SpendingTrackerAPI.Controllers;
 [ApiController]
 public class IncomeCategoryController : Controller
 {
-    private readonly IncomeCategoryService _service;
+    private readonly IIncomeCategoryService _service;
 
-    public IncomeCategoryController(IncomeCategoryService service)
+    public IncomeCategoryController(IIncomeCategoryService service)
     {
         _service = service;
     }
@@ -35,7 +35,7 @@ public class IncomeCategoryController : Controller
     public IActionResult Create([FromBody] CreateIncomeCategoryDTO incomeCategory)
     {
         _service.Create(incomeCategory);
-        return Created($"/api/incomes/categories",null);
+        return Created($"/api/income/categories",null);
     }
     
     [HttpPut("{id}")]
