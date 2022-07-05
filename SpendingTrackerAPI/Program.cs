@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using SpendingTrackerAPI.Database;
-using SpendingTrackerAPI.Entities;
 using SpendingTrackerAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
