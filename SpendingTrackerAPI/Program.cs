@@ -21,7 +21,7 @@ builder.Services.AddScoped<IExpenseService, ExpenseService>();
 builder.Services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
 builder.Services.AddScoped<IIncomeService, IncomeService>();
 builder.Services.AddScoped<IIncomeCategoryService, IncomeCategoryService>();
-
+// Add ExceptionMiddleware
 builder.Services.AddScoped<ExceptionMiddleware>();
 
 var app = builder.Build();

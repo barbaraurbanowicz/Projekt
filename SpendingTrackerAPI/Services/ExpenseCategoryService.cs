@@ -1,5 +1,6 @@
 ﻿using SpendingTrackerAPI.Database;
 using SpendingTrackerAPI.Entities;
+using SpendingTrackerAPI.Exceptions;
 
 namespace SpendingTrackerAPI.Services;
 
@@ -24,6 +25,7 @@ public class ExpenseCategoryService : IExpenseCategoryService
     public ExpenseCategory GetById(int id)
     {
         var category = _context.ExpenseCategories.FirstOrDefault(x => x.Id == id);
+        if (category == null) throw new NotFoundException("Not found!");
         return category;
     }
     
@@ -47,6 +49,7 @@ public class ExpenseCategoryService : IExpenseCategoryService
     public void Update(int id ,ExpenseCategory expenseCategory)
     {
         var dbCategory = _context.ExpenseCategories.FirstOrDefault(c => c.Id == id);
+        if (dbCategory == null) throw new NotFoundException("Not found!");
         dbCategory.Name = expenseCategory.Name;
         _context.SaveChanges();
     }
@@ -54,6 +57,7 @@ public class ExpenseCategoryService : IExpenseCategoryService
     public void Remove(int id)
     {
         var category = _context.ExpenseCategories.FirstOrDefault(c => c.Id == id);
+        if (category == null) throw new NotFoundException("Not found!");
         _context.ExpenseCategories.Remove(category);
         _context.SaveChanges();
     }

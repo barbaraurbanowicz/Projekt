@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SpendingTrackerAPI.Database;
 using SpendingTrackerAPI.Entities;
+using SpendingTrackerAPI.Exceptions;
 
 namespace SpendingTrackerAPI.Services;
 
@@ -34,6 +35,7 @@ public class IncomeService : IIncomeService
     public Income GetById(int id)
     {
         var income = _context.Incomes.Include(x=>x.IncomeCategory).FirstOrDefault(x => x.Id == id);
+        if (income == null) throw new NotFoundException("Not found!");
         return income;
     }
     
@@ -52,6 +54,7 @@ public class IncomeService : IIncomeService
     public void Remove(int id)
     {
         var income = _context.Incomes.FirstOrDefault(x => x.Id == id);
+        if (income == null) throw new NotFoundException("Not found!");
         _context.Incomes.Remove(income);
         _context.SaveChanges();
     }
@@ -59,6 +62,7 @@ public class IncomeService : IIncomeService
     public void Update(int id, Income income)
     {
         var incomeDB = _context.Incomes.FirstOrDefault(x => x.Id == id);
+        if (incomeDB == null) throw new NotFoundException("Not found!");
         incomeDB.Name = income.Name;
         incomeDB.Amount = income.Amount;
         incomeDB.IncomeCategoryId = income.IncomeCategoryId;

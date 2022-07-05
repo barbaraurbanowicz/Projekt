@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SpendingTrackerAPI.Database;
 using SpendingTrackerAPI.Entities;
+using SpendingTrackerAPI.Exceptions;
 
 namespace SpendingTrackerAPI.Services;
 
@@ -35,6 +36,7 @@ public class ExpenseService : IExpenseService
     public Expense GetById(int id)
     {
         var expense = _context.Expenses.Include(x=>x.ExpenseCategory).FirstOrDefault(x => x.Id == id);
+        if (expense == null) throw new NotFoundException("Not found!");
         return expense;
     }
     
@@ -53,6 +55,7 @@ public class ExpenseService : IExpenseService
     public void Remove(int id)
     {
         var expense = _context.Expenses.FirstOrDefault(x => x.Id == id);
+        if (expense == null) throw new NotFoundException("Not found!");
         _context.Expenses.Remove(expense);
         _context.SaveChanges();
     }
@@ -60,6 +63,7 @@ public class ExpenseService : IExpenseService
     public void Update(int id, Expense expense)
     {
         var expenseDB = _context.Expenses.FirstOrDefault(x => x.Id == id);
+        if (expenseDB == null) throw new NotFoundException("Not found!");
         expenseDB.Name = expense.Name;
         expenseDB.Amount = expense.Amount;
         expenseDB.ExpenseCategoryId = expense.ExpenseCategoryId;
