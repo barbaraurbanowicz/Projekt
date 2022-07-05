@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SpendingTrackerAPI.DTOModels;
 using SpendingTrackerAPI.Entities;
 using SpendingTrackerAPI.Services;
 
@@ -30,14 +31,14 @@ public class ExpenseController : Controller
     }
     
     [HttpPost]
-    public IActionResult Create([FromBody] Expense expense)
+    public IActionResult Create([FromBody] CreateExpenseDTO expense)
     {
         _service.Create(expense);
         return Created($"/api/expenses",null);
     }
     
     [HttpPut("{id}")]
-    public IActionResult Update([FromRoute]int id, [FromBody] Expense expense)
+    public IActionResult Update([FromRoute]int id, [FromBody] CreateExpenseDTO expense)
     {
         _service.Update(id, expense);
         return Ok();

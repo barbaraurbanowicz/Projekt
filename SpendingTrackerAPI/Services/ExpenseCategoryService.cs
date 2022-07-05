@@ -1,4 +1,5 @@
 ﻿using SpendingTrackerAPI.Database;
+using SpendingTrackerAPI.DTOModels;
 using SpendingTrackerAPI.Entities;
 using SpendingTrackerAPI.Exceptions;
 
@@ -8,8 +9,8 @@ public interface IExpenseCategoryService
 {
     ExpenseCategory GetById(int id);
     IEnumerable<ExpenseCategory> GetAll();
-    void Create(ExpenseCategory expenseCategory);
-    void Update(int id ,ExpenseCategory expenseCategory);
+    void Create(CreateExpenseCategoryDTO expenseCategory);
+    void Update(int id ,CreateExpenseCategoryDTO expenseCategory);
     void Remove(int id);
 }
 
@@ -35,7 +36,7 @@ public class ExpenseCategoryService : IExpenseCategoryService
         return categories;
     }
     
-    public void Create(ExpenseCategory expenseCategory)
+    public void Create(CreateExpenseCategoryDTO expenseCategory)
     {
         var newCategory = new ExpenseCategory()
         {
@@ -46,7 +47,7 @@ public class ExpenseCategoryService : IExpenseCategoryService
         _context.SaveChanges();
     }
         
-    public void Update(int id ,ExpenseCategory expenseCategory)
+    public void Update(int id ,CreateExpenseCategoryDTO expenseCategory)
     {
         var dbCategory = _context.ExpenseCategories.FirstOrDefault(c => c.Id == id);
         if (dbCategory == null) throw new NotFoundException("Not found!");

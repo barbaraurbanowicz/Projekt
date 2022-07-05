@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SpendingTrackerAPI.Database;
+using SpendingTrackerAPI.DTOModels;
 using SpendingTrackerAPI.Entities;
 using SpendingTrackerAPI.Exceptions;
 
@@ -9,8 +10,8 @@ public interface IIncomeCategoryService
 {
     IncomeCategory GetById(int id);
     IEnumerable<IncomeCategory> GetAll();
-    void Create(IncomeCategory incomeCategory);
-    void Update(int id ,IncomeCategory incomeCategory);
+    void Create(CreateIncomeCategoryDTO incomeCategory);
+    void Update(int id ,CreateIncomeCategoryDTO incomeCategory);
     void Remove(int id);
 }
 
@@ -36,7 +37,7 @@ public class IncomeCategoryService : IIncomeCategoryService
         return categories;
     }
     
-    public void Create(IncomeCategory incomeCategory)
+    public void Create(CreateIncomeCategoryDTO incomeCategory)
     {
         var newCategory = new IncomeCategory()
         {
@@ -47,7 +48,7 @@ public class IncomeCategoryService : IIncomeCategoryService
         _context.SaveChanges();
     }
         
-    public void Update(int id ,IncomeCategory incomeCategory)
+    public void Update(int id ,CreateIncomeCategoryDTO incomeCategory)
     {
         var dbCategory = _context.IncomeCategories.FirstOrDefault(c => c.Id == id);
         if (dbCategory == null) throw new NotFoundException("Not found!");
