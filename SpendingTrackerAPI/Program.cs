@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SpendingTrackerAPI.Database;
+using SpendingTrackerAPI.Exceptions;
 using SpendingTrackerAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ builder.Services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
 builder.Services.AddScoped<IIncomeService, IncomeService>();
 builder.Services.AddScoped<IIncomeCategoryService, IncomeCategoryService>();
 
+builder.Services.AddScoped<ExceptionMiddleware>();
 
 var app = builder.Build();
 
@@ -32,7 +34,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
 DatabaseSeed.Seed(app);
 app.MapControllers();
