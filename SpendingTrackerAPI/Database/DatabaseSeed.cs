@@ -33,15 +33,16 @@ public static class DatabaseSeed
             if (!context.IncomeCategories.Any())
             {
                 context.IncomeCategories.AddRange(
-                new IncomeCategory()
-                {
-                    Name= "Work"   
-                },
-                new IncomeCategory()
-                {
-                    Name = "Renting"
-                }
+                    new IncomeCategory()
+                    {
+                        Name = "Work"
+                    },
+                    new IncomeCategory()
+                    {
+                        Name = "Renting"
+                    }
                 );
+                context.SaveChanges();
             }
         }
     }
