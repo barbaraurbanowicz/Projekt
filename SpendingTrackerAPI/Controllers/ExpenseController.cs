@@ -6,7 +6,6 @@ namespace SpendingTrackerAPI.Controllers;
 
 [Route("api/expenses")]
 [ApiController]
-
 public class ExpenseController : Controller
 {
     private readonly IExpenseService _service;
