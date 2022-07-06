@@ -7,6 +7,28 @@
              mc:Ignorable="d"
              d:DesignHeight="625" d:DesignWidth="1000">
     <Grid Background="GhostWhite">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock  TextAlignment="Center" Margin="10" FontWeight="Bold" FontSize="24" Grid.Row="1" Grid.Column="1">Total expenses</TextBlock>
+        <TextBlock x:Name="totalExpenses"  TextAlignment="Center" Margin="10" FontWeight="Bold" FontSize="24" Grid.Row="1" Grid.Column="2"></TextBlock>
+        <TextBlock  TextAlignment="Center" Margin="10" FontWeight="Bold" FontSize="24" Grid.Row="2" Grid.Column="1">Total incomes</TextBlock>
+        <TextBlock x:Name="totalIncomes"   TextAlignment="Center" Margin="10" FontWeight="Bold" FontSize="24" Grid.Row="2" Grid.Column="2"></TextBlock>
         
     </Grid>
 </UserControl>
