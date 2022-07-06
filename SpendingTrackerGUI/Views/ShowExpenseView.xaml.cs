@@ -39,8 +39,8 @@ public partial class ShowExpenseView : UserControl
         }
     }
 
-    private void Update(object sender, RoutedEventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
+    // private void Update(object sender, RoutedEventArgs e)
+    // {
+    //     throw new System.NotImplementedException();
+    // }
 }
