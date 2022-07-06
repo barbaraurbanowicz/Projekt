@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SpendingTrackerGUI.ViewModels;
+using SpendingTrackerGUI.Views;
 
 namespace SpendingTrackerGUI
 {
@@ -27,27 +29,27 @@ namespace SpendingTrackerGUI
 
         private void AddIncomes(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            DataContext = new IncomeViewModel();
         }
 
         private void ShowIncomes(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            DataContext = new ShowIncomeViewModel();
         }
 
         private void AddExpenses(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            DataContext = new ExpenseViewModel();
         }
 
         private void ShowExpenses(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            DataContext = new ShowExpenseViewModel();
         }
 
         private void Main(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            DataContext = new MainViewModel();
         }
     }
 }
