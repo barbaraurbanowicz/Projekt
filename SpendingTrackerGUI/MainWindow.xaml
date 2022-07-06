@@ -4,8 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpendingTrackerGUI"
+        xmlns:views="clr-namespace:SpendingTrackerGUI.Views"
+        xmlns:viewModels="clr-namespace:SpendingTrackerGUI.ViewModels"
         mc:Ignorable="d"
         Title="Barbara Urbanowicz" Height="600" Width="1025" BorderBrush="Black" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    
+    <Window.Resources>
+        
+    </Window.Resources>
+    
+    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
