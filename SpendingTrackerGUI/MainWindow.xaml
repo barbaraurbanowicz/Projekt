@@ -46,7 +46,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <DockPanel Background="PeachPuff" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" >
+        <DockPanel Background="LightSteelBlue" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" >
             <StackPanel Orientation="Horizontal">
                 <Button FontWeight="Bold" Width="150" Content="Add expenses" Margin="25" Foreground="Black" BorderBrush="Black" Click="AddExpenses" />
                 <Button FontWeight="Bold" Width="150" Content="Show expenses" Margin="25" Foreground="Black" BorderBrush="Black" Click="ShowIncomes"/>

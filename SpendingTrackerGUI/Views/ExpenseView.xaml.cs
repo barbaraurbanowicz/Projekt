@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using Newtonsoft.Json;
+using SpendingTrackerAPI.DTOModels;
 using SpendingTrackerAPI.Entities;
 
 namespace SpendingTrackerGUI.Views;
@@ -14,16 +17,12 @@ public partial class ExpenseView : UserControl
     {
         InitializeComponent();
         ShowCategories();
-        
-
     }
 
     private async void ShowCategories()
     {
         List<ExpenseCategory> model = null;
         HttpClient client = new HttpClient();
-
-
         var response = await client.GetAsync("https://localhost:5001/api/expense/categories");
         response.EnsureSuccessStatusCode();
         if (response.IsSuccessStatusCode)
@@ -31,23 +30,63 @@ public partial class ExpenseView : UserControl
             string message = await response.Content.ReadAsStringAsync();
             model = JsonConvert.DeserializeObject<List<ExpenseCategory>>(message);
             View.ItemsSource = model;
-
         }
     }
     
     
-    private void AddExpense(object sender, RoutedEventArgs e)
+    private async void AddExpense(object sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        if (Name.Text != "" && Amount.Text != "" && Category.Text != "")
+        {
+            HttpClient client = new HttpClient();
+            string json = JsonConvert.SerializeObject( new CreateExpenseDTO() {Name = Name.Text, Amount = Int32.Parse(Amount.Text) , ExpenseCategoryId = Int32.Parse(Category.Text)});
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("https://localhost:5001/api/expenses", stringContent);
+            if (response.IsSuccessStatusCode)
+            {
+                ShowCategories();
+                Name.Text = "";
+                Amount.Text = "";
+                Category.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Failed");
+            }  
+        }
+        else
+        {
+            MessageBox.Show("Complete form");
+        }
+        
+        
     }
 
-    private void AddCategory(object sender, RoutedEventArgs e)
+    private async void AddCategory(object sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        HttpClient client = new HttpClient();
+        string json = JsonConvert.SerializeObject( new CreateExpenseCategoryDTO() {Name = NameCategory.Text});
+        var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+        var response = await client.PostAsync("https://localhost:5001/api/expense/categories", stringContent);
+        if (response.IsSuccessStatusCode)
+        {
+             ShowCategories();
+             NameCategory.Text = "";
+        }
+        else
+        {
+            MessageBox.Show("Failed");
+        }
     }
 
-    private void Delete(object sender, RoutedEventArgs e)
+    private async void Delete(object sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        dynamic content = ((Button) sender).DataContext;
+        HttpClient client = new HttpClient();
+        var response = await client.DeleteAsync($"https://localhost:5001/api/expense/categories/{content.Id}");
+        if (response.IsSuccessStatusCode)
+        {
+            ShowCategories();
+        }
     }
 }
