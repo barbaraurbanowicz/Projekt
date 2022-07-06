@@ -6,7 +6,52 @@
              xmlns:local="clr-namespace:SpendingTrackerGUI.Views"
              mc:Ignorable="d"
              d:DesignHeight="625" d:DesignWidth="1000">
-    <Grid>
+    <Grid Background="GhostWhite">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center" Margin="10" FontWeight="Bold" FontSize="24">ADD INCOME</TextBlock>
+        <TextBlock  TextAlignment="Center" Margin="10" FontWeight="Bold" FontSize="24" Grid.Row="1" Grid.Column="0">Name</TextBlock>
+        <TextBox Name="Name" Height="50"  Margin="10" Grid.Column="1" Grid.Row="1"></TextBox>
+        <TextBlock  TextAlignment="Center" Margin="10" FontWeight="Bold" FontSize="24" Grid.Row="2" Grid.Column="0">Amount</TextBlock>
+        <TextBox Name="Amount" Height="50" Margin="10"  Grid.Column="1" Grid.Row="2"></TextBox>
+        <TextBlock  TextAlignment="Center" Margin="10" FontWeight="Bold" FontSize="24" Grid.Row="3" Grid.Column="0">Category ID</TextBlock>
+        <TextBox Name="Category" Height="50" Margin="10"  Grid.Column="1" Grid.Row="3"></TextBox>
+        <Button Grid.Column="1" Grid.Row="4" Margin="10" FontSize="20" FontWeight="Bold" Content="Add Income" Click="AddIncome"></Button>
         
+        <TextBlock Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" TextAlignment="Center" Margin="10" FontWeight="Bold" FontSize="24">ADD INCOME CATEGORY</TextBlock>
+        <TextBlock  TextAlignment="Center" Margin="10" FontWeight="Bold" FontSize="24" Grid.Row="1" Grid.Column="3">Name</TextBlock>
+        <TextBox Name="NameCategory" Height="50"  Margin="10" Grid.Column="4" Grid.Row="1"></TextBox>
+        <Button Grid.Column="4" Grid.Row="2" Margin="10" FontSize="20" FontWeight="Bold" Content="Add Category" Click="AddCategory"></Button>
+        
+        <ListView Margin="12" Background="Gray" Grid.Row="3" Grid.Column="2" Grid.RowSpan="5" Grid.ColumnSpan="3" Name="View">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path = Id}" Header="Income Category ID" Width="196"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path = Name}" Header="Income Category Name" Width="196"></GridViewColumn>
+                    <GridViewColumn Header="Delete" Width="196">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete"  Click="Delete"></Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </UserControl>
