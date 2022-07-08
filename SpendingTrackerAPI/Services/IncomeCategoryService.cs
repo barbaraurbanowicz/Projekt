@@ -8,10 +8,33 @@ namespace SpendingTrackerAPI.Services;
 
 public interface IIncomeCategoryService
 {
+    /// <summary>
+    ///  Get record Income Category from table by ID 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     IncomeCategory GetById(int id);
+    /// <summary>
+    ///  Get records Income Category from table by ID 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     IEnumerable<IncomeCategory> GetAll();
+    /// <summary>
+    /// Create record Income Category in table
+    /// </summary>
+    /// <param name="expenseCategory"></param>
     void Create(CreateIncomeCategoryDTO incomeCategory);
+    /// <summary>
+    /// Update record Income Category in table
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="expenseCategory"></param>
     void Update(int id ,CreateIncomeCategoryDTO incomeCategory);
+    /// <summary>
+    /// Remove record Income Category from table
+    /// </summary>
+    /// <param name="id"></param>
     void Remove(int id);
 }
 

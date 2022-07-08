@@ -5,6 +5,10 @@ namespace SpendingTrackerAPI.Database;
 
 public static class DatabaseSeed
 {
+    /// <summary>
+    /// Seed database on start 
+    /// </summary>
+    /// <param name="app"></param>
     public static void Seed(IApplicationBuilder app)
     {
         using (var serviceScope = app.ApplicationServices.CreateScope())

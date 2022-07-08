@@ -9,10 +9,33 @@ namespace SpendingTrackerAPI.Services;
 
 public interface IExpenseService
 {
+    /// <summary>
+    ///  Get records Expense from table by ID 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     IEnumerable<Expense> GetAll();
+    /// <summary>
+    ///  Get record Expense from table by ID 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     Expense GetById(int id);
+    /// <summary>
+    /// Create record Expense in table
+    /// </summary>
+    /// <param name="expenseCategory"></param>
     void Create(CreateExpenseDTO expense);
+    /// <summary>
+    /// Remove record  Expense from table
+    /// </summary>
+    /// <param name="id"></param>
     void Remove(int id);
+    /// <summary>
+    /// Update record Expense in table
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="expenseCategory"></param>
     void Update(int id, CreateExpenseDTO expense);
 }
 
