@@ -1,8 +1,10 @@
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SpendingTrackerAPI;
 using SpendingTrackerAPI.Database;
+using SpendingTrackerAPI.Entities;
 using SpendingTrackerAPI.Exceptions;
 using SpendingTrackerAPI.Services;
 
@@ -54,6 +56,10 @@ builder.Services.AddScoped<IIncomeCategoryService, IncomeCategoryService>();
 // Add ExceptionMiddleware
 builder.Services.AddScoped<ExceptionMiddleware>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<IUserContextService, UserContextService>();
+
+
 var app = builder.Build();
 
 app.UseSwagger();
