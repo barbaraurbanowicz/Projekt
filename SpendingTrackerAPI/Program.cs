@@ -13,9 +13,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add database connection
-builder.Services.AddDbContext<AppDbContext>
-    (options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
+var server = builder.Configuration["DbServer"] ?? "sqlserver";
+var port = builder.Configuration["DbPort"] ?? "1433";
+var user = builder.Configuration["DBUser"] ?? "SA";
+var password = builder.Configuration["DBPassword"] ?? "Password_1234567";
+var database = builder.Configuration["Database"] ?? "SpendingTracker";
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer($"Server={server},{port};Initial catalog={database};User ID ={user};Password={password}")
+);
 // Add Services
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
 builder.Services.AddScoped<IExpenseCategoryService, ExpenseCategoryService>();
@@ -30,7 +36,6 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 
-app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
 DatabaseSeed.Seed(app);
