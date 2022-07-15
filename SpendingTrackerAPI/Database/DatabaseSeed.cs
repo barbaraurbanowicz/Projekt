@@ -48,7 +48,20 @@ public static class DatabaseSeed
                 );
                 context.SaveChanges();
             }
+            if (!context.Roles.Any())
+            {
+                context.Roles.AddRange(
+                    new Role
+                    {
+                        Name = "Admin"
+                    },
+                    new Role
+                    {
+                        Name = "User"
+                    }
+                );
+                context.SaveChanges();
+            }
         }
     }
-    
 }
