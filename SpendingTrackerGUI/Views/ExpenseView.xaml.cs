@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -23,6 +25,7 @@ public partial class ExpenseView : UserControl
     {
         List<ExpenseCategory> model = null;
         HttpClient client = new HttpClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Global.Token);
         var response = await client.GetAsync("http://localhost:5001/api/expense/categories");
         response.EnsureSuccessStatusCode();
         if (response.IsSuccessStatusCode)
@@ -30,6 +33,14 @@ public partial class ExpenseView : UserControl
             string message = await response.Content.ReadAsStringAsync();
             model = JsonConvert.DeserializeObject<List<ExpenseCategory>>(message);
             View.ItemsSource = model;
+        }
+        else if (response.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            MessageBox.Show("Unauthorized");
+        }
+        else
+        {
+            MessageBox.Show("Failed");
         }
     }
     
@@ -39,6 +50,7 @@ public partial class ExpenseView : UserControl
         if (Name.Text != "" && Amount.Text != "" && Category.Text != "")
         {
             HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Global.Token);
             string json = JsonConvert.SerializeObject( new CreateExpenseDTO() {Name = Name.Text, Amount = Int32.Parse(Amount.Text) , ExpenseCategoryId = Int32.Parse(Category.Text)});
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await client.PostAsync("http://localhost:5001/api/expenses", stringContent);
@@ -49,10 +61,14 @@ public partial class ExpenseView : UserControl
                 Amount.Text = "";
                 Category.Text = "";
             }
+            else if (response.StatusCode == HttpStatusCode.Unauthorized)
+            {
+                MessageBox.Show("Unauthorized");
+            }
             else
             {
                 MessageBox.Show("Failed");
-            }  
+            }
         }
         else
         {
@@ -65,6 +81,7 @@ public partial class ExpenseView : UserControl
     private async void AddCategory(object sender, RoutedEventArgs e)
     {
         HttpClient client = new HttpClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Global.Token);
         string json = JsonConvert.SerializeObject( new CreateExpenseCategoryDTO() {Name = NameCategory.Text});
         var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
         var response = await client.PostAsync("http://localhost:5001/api/expense/categories", stringContent);
@@ -72,6 +89,10 @@ public partial class ExpenseView : UserControl
         {
              ShowCategories();
              NameCategory.Text = "";
+        }
+        else if (response.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            MessageBox.Show("Unauthorized");
         }
         else
         {
@@ -83,10 +104,19 @@ public partial class ExpenseView : UserControl
     {
         dynamic content = ((Button) sender).DataContext;
         HttpClient client = new HttpClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Global.Token);
         var response = await client.DeleteAsync($"http://localhost:5001/api/expense/categories/{content.Id}");
         if (response.IsSuccessStatusCode)
         {
             ShowCategories();
+        }
+        else if (response.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            MessageBox.Show("Unauthorized");
+        }
+        else
+        {
+            MessageBox.Show("Failed");
         }
     }
 }

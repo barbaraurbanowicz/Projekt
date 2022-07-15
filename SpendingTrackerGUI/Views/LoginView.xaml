@@ -5,8 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SpendingTrackerGUI.Views"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="625" d:DesignWidth="1000">
     <Grid Background="GhostWhite">
-        
+        <StackPanel HorizontalAlignment="Center" Width="500" Margin="0 ,30">
+            <TextBlock Text="Login" HorizontalAlignment="Center" FontSize="36" />
+            <TextBlock Text="Email:" Margin="0,5,0,0" Width="300" />
+            <TextBox x:Name="Email" Padding="5" Width="300" />
+            <TextBlock Text="Password:" Margin="0,5,0,0" Width="300" />
+            <PasswordBox x:Name="Password" Padding="5" Width="300" />
+            <Button  Content="Login" Padding="5" Margin="0,5,0,0" Click="Login_Click" Width="300" />
+        </StackPanel>
     </Grid>
 </UserControl>
