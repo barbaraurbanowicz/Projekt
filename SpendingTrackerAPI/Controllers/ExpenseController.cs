@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SpendingTrackerAPI.DTOModels;
 using SpendingTrackerAPI.Entities;
 using SpendingTrackerAPI.Services;
@@ -7,6 +8,8 @@ namespace SpendingTrackerAPI.Controllers;
 
 [Route("api/expenses")]
 [ApiController]
+[Authorize]
+
 public class ExpenseController : Controller
 {
     private readonly IExpenseService _service;
