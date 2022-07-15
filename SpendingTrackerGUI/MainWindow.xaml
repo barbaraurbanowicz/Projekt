@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:SpendingTrackerGUI.Views"
         xmlns:viewModels="clr-namespace:SpendingTrackerGUI.ViewModels"
         mc:Ignorable="d"
-        Title="Barbara Urbanowicz - Spending Tracker" Height="600" Width="1175" BorderBrush="Black" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Barbara Urbanowicz - Spending Tracker" Height="600" Width="1025" BorderBrush="Black" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     
     <Window.Resources>
         <DataTemplate x:Name="Expense" DataType="{x:Type viewModels:ExpenseViewModel}">
@@ -54,15 +54,13 @@
         </Grid.RowDefinitions>
         <DockPanel Background="LightSteelBlue" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" >
             <StackPanel Orientation="Horizontal">
-                <Button FontWeight="Bold" Width="110" Content="Add expenses" Margin="25" Foreground="Black" BorderBrush="Black" Click="AddExpenses" />
-                <Button FontWeight="Bold" Width="110" Content="Show expenses" Margin="25" Foreground="Black" BorderBrush="Black" Click="ShowExpenses"/>
-                <Button FontWeight="Bold" Width="110" Content="Add incomes" Margin="25" Foreground="Black" BorderBrush="Black" Click="AddIncomes"/>
-                <Button FontWeight="Bold" Width="110" Content="Show incomes" Margin="25" Foreground="Black" BorderBrush="Black" Click="ShowIncomes"/>
-                <Button FontWeight="Bold" Width="110" Content="Main" Margin="25" Foreground="Black" BorderBrush="Black" Click="Main"/>
-                <Button FontWeight="Bold" Width="110" Content="Register" Margin="25" Foreground="Black" BorderBrush="Black" Click="Register"/>
-                <Button FontWeight="Bold" Width="110" Content="Login" Margin="25" Foreground="Black" BorderBrush="Black" Click="Login"/>
+                <Button FontWeight="Bold" Width="150" Content="Add expenses" Margin="25" Foreground="Black" BorderBrush="Black" Click="AddExpenses" />
+                <Button  FontWeight="Bold" Width="150" Content="Show expenses" Margin="25" Foreground="Black" BorderBrush="Black" Click="ShowExpenses"/>
+                <Button  FontWeight="Bold" Width="150" Content="Add incomes" Margin="25" Foreground="Black" BorderBrush="Black" Click="AddIncomes"/>
+                <Button  FontWeight="Bold" Width="150" Content="Show incomes" Margin="25" Foreground="Black" BorderBrush="Black" Click="ShowIncomes"/>
+                <Button  FontWeight="Bold" Width="150" Content="Main" Margin="25" Foreground="Black" BorderBrush="Black" Click="Main"/>
             </StackPanel>
         </DockPanel>
-        <ContentControl  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Content="{Binding}"/>
+        <ContentControl   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="5" Content="{Binding}"/>
     </Grid>
 </Window>

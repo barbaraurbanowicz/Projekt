@@ -51,15 +51,7 @@ namespace SpendingTrackerGUI
         {
             DataContext = new MainViewModel();
         }
-
-        private void Login(object sender, RoutedEventArgs e)
-        {
-            DataContext = new LoginViewModel();
-        }
-
-        private void Register(object sender, RoutedEventArgs e)
-        {
-            DataContext = new RegisterViewModel();
-        }
+        
+        
     }
 }
