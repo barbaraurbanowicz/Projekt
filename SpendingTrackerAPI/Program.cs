@@ -1,4 +1,7 @@
+using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using SpendingTrackerAPI;
 using SpendingTrackerAPI.Database;
 using SpendingTrackerAPI.Exceptions;
 using SpendingTrackerAPI.Services;
@@ -11,6 +14,27 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add Auth
+var authorizationSettings = new AuthSettings();
+builder.Configuration.GetSection("Authentication").Bind(authorizationSettings);
+builder.Services.AddSingleton(authorizationSettings);
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = "Bearer";
+    option.DefaultScheme = "Bearer";
+    option.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer(option =>
+{
+    option.RequireHttpsMetadata = false;
+    option.SaveToken = true;
+    option.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = authorizationSettings.JwtIssuer,
+        ValidAudience = authorizationSettings.JwtIssuer,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authorizationSettings.JwtKey)),
+    };
+});
 
 // Add database connection
 var server = builder.Configuration["DbServer"] ?? "sqlserver";
@@ -29,7 +53,7 @@ builder.Services.AddScoped<IIncomeService, IncomeService>();
 builder.Services.AddScoped<IIncomeCategoryService, IncomeCategoryService>();
 // Add ExceptionMiddleware
 builder.Services.AddScoped<ExceptionMiddleware>();
-
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
 app.UseSwagger();
