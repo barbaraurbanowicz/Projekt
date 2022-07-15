@@ -19,7 +19,7 @@ public partial class ShowIncomeView : UserControl
     {
         List<Income> model = null;
         HttpClient client = new HttpClient();
-        var response = await client.GetAsync("https://localhost:5001/api/incomes");
+        var response = await client.GetAsync("http://localhost:5001/api/incomes");
         response.EnsureSuccessStatusCode();
         if (response.IsSuccessStatusCode)
         {
@@ -32,15 +32,11 @@ public partial class ShowIncomeView : UserControl
     {
         dynamic content = ((Button) sender).DataContext;
         HttpClient client = new HttpClient();
-        var response = await client.DeleteAsync($"https://localhost:5001/api/incomes/{content.Id}");
+        var response = await client.DeleteAsync($"http://localhost:5001/api/incomes/{content.Id}");
         if (response.IsSuccessStatusCode)
         {
             ShowExpenses();
         }
     }
 
-    // private void Update(object sender, RoutedEventArgs e)
-    // {
-    //     throw new System.NotImplementedException();
-    // }
 }

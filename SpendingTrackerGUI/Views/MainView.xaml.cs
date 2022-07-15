@@ -23,7 +23,7 @@ public partial class MainView : UserControl
         List<Expense> model = null;
         int sum = 0;
         HttpClient client = new HttpClient();
-        var response = await client.GetAsync("https://localhost:5001/api/expenses");
+        var response = await client.GetAsync("http://localhost:5001/api/expenses");
         response.EnsureSuccessStatusCode();
         if (response.IsSuccessStatusCode)
         {
@@ -43,7 +43,7 @@ public partial class MainView : UserControl
         List<Income> model = null;
         int sum = 0;
         HttpClient client = new HttpClient();
-        var response = await client.GetAsync("https://localhost:5001/api/incomes");
+        var response = await client.GetAsync("http://localhost:5001/api/incomes");
         response.EnsureSuccessStatusCode();
         if (response.IsSuccessStatusCode)
         {

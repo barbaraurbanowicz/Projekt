@@ -22,7 +22,7 @@ public partial class IncomeView : UserControl
     {
         List<IncomeCategory> model = null;
         HttpClient client = new HttpClient();
-        var response = await client.GetAsync("https://localhost:5001/api/income/categories");
+        var response = await client.GetAsync("http://localhost:5001/api/income/categories");
         response.EnsureSuccessStatusCode();
         if (response.IsSuccessStatusCode)
         {
@@ -39,7 +39,7 @@ public partial class IncomeView : UserControl
             HttpClient client = new HttpClient();
             string json = JsonConvert.SerializeObject( new CreateIncomeDTO() {Name = Name.Text, Amount = Int32.Parse(Amount.Text) , IncomeCategoryId = Int32.Parse(Category.Text)});
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("https://localhost:5001/api/incomes", stringContent);
+            var response = await client.PostAsync("http://localhost:5001/api/incomes", stringContent);
             if (response.IsSuccessStatusCode)
             {
                 ShowCategories();
@@ -63,7 +63,7 @@ public partial class IncomeView : UserControl
         HttpClient client = new HttpClient();
         string json = JsonConvert.SerializeObject( new CreateIncomeCategoryDTO() {Name = NameCategory.Text});
         var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-        var response = await client.PostAsync("https://localhost:5001/api/income/categories", stringContent);
+        var response = await client.PostAsync("http://localhost:5001/api/income/categories", stringContent);
         if (response.IsSuccessStatusCode)
         {
             ShowCategories();
@@ -79,7 +79,7 @@ public partial class IncomeView : UserControl
     {
         dynamic content = ((Button) sender).DataContext;
         HttpClient client = new HttpClient();
-        var response = await client.DeleteAsync($"https://localhost:5001/api/income/categories/{content.Id}");
+        var response = await client.DeleteAsync($"http://localhost:5001/api/income/categories/{content.Id}");
         if (response.IsSuccessStatusCode)
         {
             ShowCategories();
