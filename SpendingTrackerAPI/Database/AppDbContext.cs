@@ -13,4 +13,6 @@ public class AppDbContext:DbContext
     public DbSet<ExpenseCategory> ExpenseCategories { get; set; }
     public DbSet<Income> Incomes { get; set; }
     public DbSet<IncomeCategory> IncomeCategories { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
 }
