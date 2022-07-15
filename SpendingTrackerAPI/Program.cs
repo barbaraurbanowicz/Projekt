@@ -58,6 +58,7 @@ builder.Services.AddScoped<ExceptionMiddleware>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 var app = builder.Build();
@@ -67,6 +68,7 @@ app.UseSwaggerUI();
 
 
 app.UseMiddleware<ExceptionMiddleware>();
+app.UseAuthentication();
 app.UseAuthorization();
 DatabaseSeed.Seed(app);
 app.MapControllers();

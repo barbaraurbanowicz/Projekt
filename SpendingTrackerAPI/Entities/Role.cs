@@ -1,7 +1,10 @@
-﻿namespace SpendingTrackerAPI.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SpendingTrackerAPI.Entities;
 
 public class Role
 {
+    [Key]
     public int Id { get; set; }
     public string Name { get; set; }
 }

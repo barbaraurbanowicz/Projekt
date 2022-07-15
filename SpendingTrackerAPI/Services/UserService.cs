@@ -11,7 +11,13 @@ using SpendingTrackerAPI.Exceptions;
 
 namespace SpendingTrackerAPI.Services;
 
-public class UserService
+public interface IUserService
+{
+    void Register(CreateUserDTO createUserDto);
+    string Login(LoginUserDTO loginUserDto);
+}
+
+public class UserService : IUserService
 {
     private readonly AppDbContext _context;
     private readonly IPasswordHasher<User> _passwordHasher;
